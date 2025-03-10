@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Enchanted Love Letter</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="outputPage">
+    <div class="output-container">
+      <h2>Your Enchanted Love Letter</h2>
+      <div id="letterOutput" class="letter-output"></div>
+      <div class="options">
+        <button id="downloadPDF">Download as PDF</button>
+        <button id="sendEmail">Send via Email</button>
+        <button id="shareSocial">Share on Social Media</button>
+      </div>
+      <div id="audioPlayer" class="audio-player"></div>
+      <button id="backToGenerator">Back</button>
+    </div>
+  </section>
+  
+  <!-- Include jsPDF from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      const storedData = localStorage.getItem('generatedLetterData');
+      if(storedData) {
+         const { letter, backgroundSong } = JSON.parse(storedData);
+         document.getElementById('letterOutput').innerText = letter;
+         
+         // Set up background song if one was selected
+         let songUrl = "";
+         if(backgroundSong === "romanticPiano") {
+           songUrl = "https://www.bensound.com/bensound-music/bensound-romantic.mp3";
+         } else if(backgroundSong === "acousticLove") {
+           songUrl = "https://www.bensound.com/bensound-music/bensound-acousticbreeze.mp3";
+         }
+         if(songUrl) {
+           document.getElementById('audioPlayer').innerHTML = `
+             <audio controls autoplay loop>
+               <source src="${songUrl}" type="audio/mpeg">
+               Your browser does not support the audio element.
+             </audio>
+           `;
+         }
+      }
+      
+      // Download as PDF functionality
+      document.getElementById('downloadPDF').addEventListener('click', function(){
+         const { jsPDF } = window.jspdf;
+         const doc = new jsPDF();
+         doc.text(document.getElementById('letterOutput').innerText, 10, 10);
+         doc.save("love-letter.pdf");
+      });
+      
+      // Send via Email functionality
+      document.getElementById('sendEmail').addEventListener('click', function(){
+         const subject = encodeURIComponent("Your Enchanted Love Letter");
+         const body = encodeURIComponent(document.getElementById('letterOutput').innerText);
+         window.location.href = `mailto:?subject=${subject}&body=${body}`;
+      });
+      
+      // Share on Social Media (Twitter example)
+      document.getElementById('shareSocial').addEventListener('click', function(){
+         const shareText = encodeURIComponent(document.getElementById('letterOutput').innerText);
+         const shareUrl = `https://twitter.com/intent/tweet?text=${shareText}`;
+         window.open(shareUrl, "_blank");
+      });
+      
+      // Back button returns to generator page
+      document.getElementById('backToGenerator').addEventListener('click', function(){
+         window.location.href = "generator.html";
+      });
+    });
+  </script>
+</body>
+</html>

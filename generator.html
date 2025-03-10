@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter Generator</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="generatorPage">
+    <div class="form-container">
+      <h2>Compose Your Heartfelt Message</h2>
+      <form id="letterForm">
+        <div class="form-group">
+          <label for="receiverName">Receiver's Name:</label>
+          <input type="text" id="receiverName" name="receiverName" placeholder="e.g., Emily" required>
+        </div>
+        <div class="form-group">
+          <label for="giverName">Your Name (Giver):</label>
+          <input type="text" id="giverName" name="giverName" placeholder="e.g., Michael" required>
+        </div>
+        <div class="form-group">
+          <label for="tone">Tone of the Letter:</label>
+          <select id="tone" name="tone">
+            <option value="romantic">Romantic</option>
+            <option value="funny">Funny</option>
+            <option value="poetic">Poetic</option>
+            <option value="nostalgic">Nostalgic</option>
+            <option value="interesting">Interesting</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="details">Express Your Feelings:</label>
+          <textarea id="details" name="details" placeholder="Share your deepest feelings and dreams..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="favoriteMemory">Favorite Memory (Optional):</label>
+          <textarea id="favoriteMemory" name="favoriteMemory" placeholder="Describe a cherished moment you share..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="length">Letter Length:</label>
+          <select id="length" name="length">
+            <option value="short">Short &amp; Sweet</option>
+            <option value="medium">Medium &amp; Meaningful</option>
+            <option value="long">Long &amp; Lyrical</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="backgroundSong">Background Song:</label>
+          <select id="backgroundSong" name="backgroundSong">
+            <option value="none">None</option>
+            <option value="romanticPiano">Romantic Piano</option>
+            <option value="acousticLove">Acoustic Love</option>
+          </select>
+        </div>
+        <button type="button" id="generateLetter">Generate Letter</button>
+      </form>
+    </div>
+  </section>
+  
+  <script src="script.js"></script>
+</body>
+</html>
